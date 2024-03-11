@@ -3,7 +3,7 @@ import time
 import pandas as pd
 import os
 
-# 请求头
+# Request headers/请求头
 headers = {
     'x-zse-93': '101_3_3.0',
     'x-ab-param': 'se_ffzx_jushen1=0;zr_expslotpaid=1;top_test_4_liguangyi=1;qap_question_author=0;tp_dingyue_video=0;tp_topic_style=0;tp_contents=2;qap_question_visitor= 0;pf_noti_entry_num=2;tp_zrec=1;pf_adjust=1;zr_slotpaidexp=1',
@@ -25,14 +25,14 @@ headers = {
 
 
 def trans_date(v_timestamp):
-    """10位时间戳转换为时间字符串"""
+    # Convert 10-digit timestamp to time string 10/位时间戳转换为时间字符串
     timeArray = time.localtime(v_timestamp)
     otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
     return otherStyleTime
 
 
 def tran_gender(gender_tag):
-    """转换性别"""
+    # Convert gender/性别转换
     if gender_tag == 1:
         return '男'
     elif gender_tag == 0:
@@ -45,13 +45,14 @@ def comment_spider(v_result_file, v_answer_list):
     for answer_id in v_answer_list:
         url0 = 'https://www.zhihu.com/api/v4/answers/{}/root_comments?order=normal&limit=20&offset=0&status=open'.format(
             answer_id)
-        r0 = requests.get(url0, headers=headers)  # 发送请求
-        total = r0.json()['common_counts']  # 一共多少条评论
+        r0 = requests.get(url0, headers=headers)  # Send request/发送请求
+        total = r0.json()['common_counts']  # Total number of comments/一共多少条评论
         print('一共{}条评论'.format(total))
-        # 判断一共多少页（每页20条评论）
+        print('Total {} comments'.format(total))
+        # Calculate total pages (20 comments per page)/判断一共多少页（每页20条评论）
         max_page = int(total / 20)
         print('max_page:', max_page)
-        # 开始循环爬取
+        # Start crawling loop/开始循环爬取
         for i in range(max_page):
             offset = i * 20
             url = 'https://www.zhihu.com/api/v4/answers/{}/root_comments?order=normal&limit=20&offset={}&status=open'.format(
@@ -59,14 +60,15 @@ def comment_spider(v_result_file, v_answer_list):
                 str(offset))
             r = requests.get(url, headers=headers)
             print('正在爬取第{}页'.format(i + 1))
+            print('Crawling page {}'.format(i + 1))
             j_data = r.json()
             comments = j_data['data']
-            # 如果没有评论了，就结束循环
+            # If there are no comments, end the loop/如果没有评论了，就结束循环
             if not comments:
                 print('无评论，退出循环')
                 break
-            # 否则开始爬取
-            # 定义空列表用于存数据
+            # Otherwise, start crawling/否则开始爬取
+            # Define empty lists to store data/定义空列表用于存数据
             answer_urls = []  # 回答url
             authors = []  # 评论作者
             genders = []  # 作者性别
@@ -77,7 +79,7 @@ def comment_spider(v_result_file, v_answer_list):
             child_tag = []  # 评论级别
             vote_counts = []  # 点赞数
             ip_list = []  # IP属地
-            for c in comments:  # 一级评论
+            for c in comments:  # Root comments/一级评论
                 # 回答url
                 answer_urls.append('https://www.zhihu.com/answer/' + answer_id)
                 # 评论作者
@@ -106,7 +108,7 @@ def comment_spider(v_result_file, v_answer_list):
                 vote_counts.append(c['vote_count'])
                 # IP属地
                 ip_list.append(c['address_text'].replace('IP 属地', ''))
-                if c['child_comments']:  # 如果二级评论存在
+                if c['child_comments']:  # If child comments/如果二级评论存在
                     for child in c['child_comments']:  # 二级评论
                         # 回答url
                         answer_urls.append('https://www.zhihu.com/answer/' + answer_id)
@@ -156,14 +158,22 @@ def comment_spider(v_result_file, v_answer_list):
 
 if __name__ == '__main__':
     csv_file = '知乎评论.csv'
+    # If CSV file exists, delete it first to avoid duplicate data due to appending
     # 如果csv存在，先删除，避免由于追加产生重复数据
     if os.path.exists(csv_file):
         print('文件存在，删除：{}'.format(csv_file))
         os.remove(csv_file)
+    # Start crawling, provide related Zhihu popular answer IDs
     # 开始爬取, 相关的知乎热门回答id
-    comment_spider(v_result_file=csv_file,  # 保存文件名
-                   v_answer_list=['3422715693', '3421558669', '3424319850', '3421775502', '3422292503', '3423971470',
-                                  '3422577886', '3422583316', '3422489477', '3422876128', '3422885996', '3420991610',
-                                  '3422649294', '3422473052', '3421454261', '3422648915', '3422567030', '3423829261',
-                                  '3421575604', '3422652225', '3423480963', '3422781684', '3420976176', '3421290956'])
+    comment_spider(v_result_file=csv_file,  # Save file name/保存文件名
+                   v_answer_list=['3417671148', '3415015097', '3414774295', '3413539836', '3417321388', '3416418908',
+                                  '3414538444', '3412331319', '3422662997', '3419479042', '3422825442', '3413631698',
+                                  '3414514570', '3413346772', '3419090023', '3413235169', '3411098017', '3418790510',
+                                  '3421306794', '3422682745', '3416916334', '3418986199', '3417107513', '3417947675',
+                                  '3419416834', '3414862523', '3420865084', '3413654789', '3415498797', '3417812839',
+                                  '3423273736', '3417901134', '3417187148', '3420474837', '3410707812', '3420276010',
+                                  '3418531614', '3416272041', '3422129395', '3418273115', '3410704634', '3421255379',
+                                  '3418131835', '3417517216', '3418513172', '3414044112', '3417156998', '3419738456',
+                                  '3414960846', '3413215219', '3421320056', '3423235598', '3416045133', '3420258353'])
     print('抓取完成 退出程序')
+    print('Crawling completed. Exiting program')
