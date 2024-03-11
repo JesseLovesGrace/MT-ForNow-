@@ -11,7 +11,7 @@ Platform: Zhihu, Weibo
 	Step 2: Clean data (removing irrelevant information and tokenization)
 
 Stage 2: Topic Modeling
-  Step 1: Find out whether Laten Dirichlet Allocation (LDA) or Latent Semantic Analysis (LSD) is good for topic modeling (I’ll try both to see if one fits better than the other)
+  Step 1: Find out whether Laten Dirichlet Allocation (LDA) or Latent Semantic Analysis (LSA) is good for topic modeling (I’ll try both to see if one fits better than the other)
   Step 2:  Topic model
 
 Stage 3: Ideological Analysis:
