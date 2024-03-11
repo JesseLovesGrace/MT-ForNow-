@@ -1,6 +1,11 @@
 This is the note for my Probably-Gonna-Be Master Thesis. Fingers Crossed!
 
 Topic: How Censorship in China influences people’s Political Expression-A Study on Zhihu’s Comments on Political Topics
+
+Or to be a little bit aggressive: 
+Beyond the Firewall: Analyzing Ideological Expression and Censorship in Chinese Social Media"
+"Dissent in the Digital Age: Investigating Ideological Expression and Censorship in Chinese Online Forums
+
 Data Source: Web scraping from Zhihu on Comments (more is always better)
 
 Steps of the Research
