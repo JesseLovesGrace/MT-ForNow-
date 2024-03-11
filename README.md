@@ -12,31 +12,31 @@ Steps of the Research
 
 Stage 1: Data Collection and Cleaning
 Platform: Zhihu, Weibo
-	Step 1: Web Scraping Tool for Zhihu (check and done) and Weibo (Still developing)
-	Step 2: Clean data (removing irrelevant information and tokenization)
+Step 1: Web Scraping Tool for Zhihu (check and done) and Weibo (Still developing)
+Step 2: Clean data (removing irrelevant information and tokenization)
 
 Stage 2: Topic Modeling
-  Step 1: Find out whether Laten Dirichlet Allocation (LDA) or Latent Semantic Analysis (LSA) is good for topic modeling (I’ll try both to see if one fits better than the other)
-  Step 2:  Topic model
+Step 1: Find out whether Laten Dirichlet Allocation (LDA) or Latent Semantic Analysis (LSA) is good for topic modeling (I’ll try both to see if one fits better than the other)
+Step 2:  Topic model
 
 Stage 3: Ideological Analysis:
-  Step 1: Find labeled data based on relevant literature and theories for model training (which can be challenging for Chinese corpus; therefore, I might need to label some part of the data to build the corpus manually. Need someone with political science background.)
-	Step 2: Build ML model and train it (supervised learning)
-	Step 3: Label the classified comments into ideological categories
+Step 1: Find labeled data based on relevant literature and theories for model training (which can be challenging for Chinese corpus; therefore, I might need to label some part of the data to build the corpus manually. Need someone with political science background.)
+Step 2: Build ML model and train it (supervised learning)
+Step 3: Label the classified comments into ideological categories
 
 Stage 4: Comparative Analysis:
 Compare the comments on sensitive and censored political topics with those on non-sensitive social and other topics. Analyze differences in:
-  1.	Sentiment
-  2.	language use
-  3.	topic prevalence
+1.	Sentiment
+2.	language use
+3.	topic prevalence
 between the two sets of comments to identify how censorship influences people's expression on political topics.
 
 Stage 5: Identify Coding Language and Strategies (If I can find any)
 
 Stage 6: Statistical Analysis (Robust test):
-  1.	Propensity Score Matching
-  2.	Bayesian Inference: estimate the probability of authors belonging to different ideological groups based on their commenting behavior and language use. (Still trying to figure it out)
-  3.	Structural Equation Modeling: model the relationships between ideological affiliation, commenting behavior, and discourse characteristics.
+1. Propensity Score Matching
+2. Bayesian Inference: estimate the probability of authors belonging to different ideological groups based on their commenting behavior and language use. (Still trying to figure it out)
+3. Structural Equation Modeling: model the relationships between ideological affiliation, commenting behavior, and discourse characteristics.
 
 Stage 7: Interpretation and Conclusion
 
