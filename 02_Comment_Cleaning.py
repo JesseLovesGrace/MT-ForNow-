@@ -7,6 +7,8 @@ def clean_comment(comment):
     comment = re.sub(r'http\S+', '', comment)
     # Remove picture links
     comment = re.sub(r'\[图片\]', '', comment)
+    # Remove HTML tags such as <p>
+    comment = re.sub(r'<[^>]*>', '', comment)
     # Remove other irrelevant information
     # Add more cleaning steps as needed
     
